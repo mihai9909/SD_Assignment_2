@@ -10,7 +10,7 @@ RSpec.describe StudentsController, type: :request do
     let(:params) { { student: { email: 'test@test.com', password: 'password' } } }
 
     before do
-      post '/student', params: params
+      post students_path, params: params
     end
 
     it 'returns 200' do

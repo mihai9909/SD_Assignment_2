@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :require_teacher, only: [:create, :update, :destroy]
 
-  def show
+  def index
     @students = Student.all
   end
 
