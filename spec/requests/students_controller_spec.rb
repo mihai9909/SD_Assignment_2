@@ -1,12 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe StudentsController, type: :request do
+  let(:teacher) { create(:teacher) }
+
   before do
     sign_in teacher
   end
 
-  describe 'POST /student' do
-    let(:teacher) { create(:teacher) }
+  describe 'DELETE /students/:id' do
+    let!(:student) { create(:student) }
+
+    before do
+      delete student_path(student)
+    end
+
+    it 'returns 200' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'deletes student' do
+      expect(Student.find_by(id: student.id)).to be_nil
+    end
+  end
+
+  describe 'GET /students' do
+    let!(:students) { create_list(:student, 3) }
+
+    before do
+      get students_path
+    end
+
+    it 'returns 200' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns students' do
+      students = JSON.parse(response.body)['students']
+      expect(students.length).to eq(3)
+    end
+  end
+
+  describe 'POST /students' do
     let(:params) { { student: { email: 'test@test.com', password: 'password' } } }
 
     before do
