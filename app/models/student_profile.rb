@@ -3,7 +3,7 @@ class StudentProfile < ApplicationRecord
 
   belongs_to :student, optional: false
 
-  before_save :generate_token_digest!
+  before_save :generate_token_digest!, if: -> { token.present? }
 
   def generate_token!
     self.token = SecureRandom.hex(128)
