@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.build_student_profile.generate_token!
-    @student.save
+    render partial: 'errors', locals: { object: @student }, status: :unprocessable_entity unless @student.save
   end
 
   private

@@ -6,6 +6,3 @@ json.student do
     json.active @student.student_profile.active
   end
 end
-json.errors do
-  json.partial! partial: 'errors', locals: { object: @student }
-end
