@@ -56,6 +56,9 @@ group :development, :test do
 
   # Use dotenv to manage environment variables
   gem "dotenv-rails"
+
+  # Use Faker to generate fake data
+  gem "faker"
 end
 
 group :development do
