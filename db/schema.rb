@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_194158) do
     t.string "hobby"
     t.string "token_digest"
     t.integer "student_id"
+    t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

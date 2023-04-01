@@ -6,6 +6,7 @@ class CreateStudentProfiles < ActiveRecord::Migration[7.0]
       t.string :hobby
       t.string :token_digest
       t.integer :student_id
+      t.boolean :active, default: false
 
       t.timestamps
     end
