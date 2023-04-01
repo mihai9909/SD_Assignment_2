@@ -1,6 +1,20 @@
 class StudentsController < ApplicationController
   before_action :require_teacher, only: [:create, :update, :destroy]
-  before_action :find_student, only: [:update, :destroy]
+  before_action :find_student, only: [:update, :destroy, :register]
+
+  def register
+    if @student && @student.student_profile.valid_token?(params[:student][:token]) && !@student.student_profile.active?
+      @student.attributes = student_params
+      @student.student_profile.active = true
+      if @student.save
+        render 'show', status: :ok
+      else
+        render partial: 'errors', locals: { object: @student }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Incorrect token' }
+    end
+  end
 
   def index
     @students = Student.all
