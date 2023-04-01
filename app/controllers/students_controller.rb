@@ -1,5 +1,9 @@
 class StudentsController < ApplicationController
-  before_action :require_student
+  before_action :require_student, only: [:create, :update, :destroy]
+
+  def show
+    @students = Student.all
+  end
 
   private
   def require_student
