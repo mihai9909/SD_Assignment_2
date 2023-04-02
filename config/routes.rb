@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post :register
     end
   end
+  get 'students/laboratories', to: 'students#laboratories'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

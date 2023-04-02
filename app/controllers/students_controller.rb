@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :require_teacher, only: [:create, :update, :destroy]
-  before_action :find_student, only: [:update, :destroy, :register]
+  before_action :find_student, only: [:update, :destroy, :register, :laboratories]
 
   def register
     if @student && @student.student_profile.valid_token?(params[:student][:token]) && !@student.student_profile.active?
@@ -18,6 +18,10 @@ class StudentsController < ApplicationController
 
   def index
     @students = Student.all
+  end
+
+  def laboratories
+    @attendances = Attendance.where(student: current_user).includes(:laboratory_class)
   end
 
   def update
