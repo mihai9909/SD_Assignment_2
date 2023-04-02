@@ -5,7 +5,4 @@ json.laboratory do
   json.description laboratory.description
   json.curriculum laboratory.curriculum
   json.start_time laboratory.start_time
-  json.teacher do
-    json.email laboratory.teacher.email
-  end
 end

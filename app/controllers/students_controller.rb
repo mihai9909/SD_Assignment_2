@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :require_teacher, only: [:create, :update, :destroy]
   before_action :find_student, only: [:update, :destroy, :register, :laboratories]
+  before_action :require_student, only: [:laboratories]
 
   def register
     if @student && @student.student_profile.valid_token?(params[:student][:token]) && !@student.student_profile.active?
@@ -63,5 +64,9 @@ class StudentsController < ApplicationController
 
   def find_student
     @student = Student.find_by(id: params[:id])
+  end
+  
+  def require_student
+    raise ActiveRecord::RecordNotFound unless current_user.is_a?(Student)
   end
 end
