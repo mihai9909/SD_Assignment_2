@@ -1,2 +1,6 @@
-json.extract! assignment, :id, :created_at, :updated_at
-json.url assignment_url(assignment, format: :json)
+json.assignment do
+  json.id assignment.id
+  json.name assignment.name
+  json.laboratory_class_id assignment.laboratory_class_id
+  json.deadline assignment.deadline
+end

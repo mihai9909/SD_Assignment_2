@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :laboratories, only: [:index, :create, :update, :destroy], :defaults => { :format => :json } do
     member do
       post :assignments, to: 'assignments#create'
-      get :assignments, to: 'assignments#show'
+      get :assignments, to: 'assignments#index'
     end
   end
   resources :attendances, only: [:create, :update, :destroy]
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
   get 'students/laboratories', to: 'students#laboratories'
+  put 'assignments/:id', to: 'assignments#update'
+  delete 'assignments/:id', to: 'assignments#destroy'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
