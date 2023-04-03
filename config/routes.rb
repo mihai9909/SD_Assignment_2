@@ -14,9 +14,12 @@ Rails.application.routes.draw do
       post :register
     end
   end
+
   get 'students/laboratories', to: 'students#laboratories'
   put 'assignments/:id', to: 'assignments#update'
   delete 'assignments/:id', to: 'assignments#destroy'
+  post 'assignments/:id/submit', to: 'submissions#create'
+  put 'submission/:id', to: 'submissions#update'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
