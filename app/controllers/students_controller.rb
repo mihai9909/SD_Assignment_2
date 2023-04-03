@@ -59,7 +59,7 @@ class StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:email, :password, student_profile_attributes: [:full_name, :hobby])
+    params.require(:student).permit(:email, :password, student_profile_attributes: %i[:full_name, :hobby])
   end
 
   def find_student
