@@ -10,6 +10,10 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def index
+    @submissions = current_user.submissions
+  end
+
   def create
     @submission = Submission.new(submission_params)
     @submission.assignment = current_user.assignments.find_by(id: params[:id])

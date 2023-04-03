@@ -1,5 +1,5 @@
 class AssignmentsController < TeachersController
-  before_action :find_assignment, only: [:update, :destroy]
+  before_action :find_assignment, only: [:update, :destroy, :grade]
   before_action :require_teacher_laboratory, only: [:create, :update, :destroy]
 
   def index
@@ -21,6 +21,20 @@ class AssignmentsController < TeachersController
       render 'show', status: :ok
     else
       render partial: 'errors', locals: { object: @assignment }, status: :unprocessable_entity
+    end
+  end
+
+  def grade
+    if @assignment.nil?
+      render json: { message: 'Assignment not found' }, status: :not_found
+    elsif  @submission = @assignment.submissions.find_by(id: params[:submission_id])
+      if @submission.update(grade: params[:grade])
+        render json: { message: 'Graded successfully' }, status: :ok
+      else
+        render partial: 'errors', locals: { object: @submission }, status: :unprocessable_entity
+      end
+    else
+      render json: { message: 'Submission not found' }, status: :not_found
     end
   end
 

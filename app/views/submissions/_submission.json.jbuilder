@@ -4,4 +4,5 @@ json.submission do
   json.user_id submission.user_id
   json.comment submission.comment
   json.link submission.link
+  json.grade submission.grade
 end

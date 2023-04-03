@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   put 'assignments/:id', to: 'assignments#update'
   delete 'assignments/:id', to: 'assignments#destroy'
   post 'assignments/:id/submit', to: 'submissions#create'
+  put 'assignments/:id/submissions/:submission_id/grade', to: 'assignments#grade'
   put 'submission/:id', to: 'submissions#update'
+  get 'submissions', to: 'submissions#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
